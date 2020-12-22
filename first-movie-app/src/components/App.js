@@ -34,9 +34,16 @@ deleteMovie = (movie) => {
     const newMovieList=this.state.movies.filter(
         m=>m.id !== movie.id
     )
-    this.setState({
-    movies:newMovieList
-    });
+
+    //eger yuxardaki array hazir sekilde elimizde olmasa bu formada yazmaq daha mentiqlidir
+    // this.setState({
+    // movies:newMovieList
+
+    // });
+
+    this.setState(state =>({
+        movies:newMovieList
+    }))
 }
 
 
