@@ -27,41 +27,56 @@ class App extends React.Component {
                 "imageURL": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/qHCZ6LjtmqWDfXXN28TlIC9OppK.jpg",
                 "id": 11
             }
-        ]
+        ],
+
+        //SearchBardan state-i silib burda yaziriq.
+        searchQuery: ""
     }
 
-deleteMovie = (movie) => {
-    const newMovieList=this.state.movies.filter(
-        m=>m.id !== movie.id
-    )
 
-    //eger yuxardaki array hazir sekilde elimizde olmasa bu formada yazmaq daha mentiqlidir
-    // this.setState({
-    // movies:newMovieList
 
-    // });
+    deleteMovie = (movie) => {
+        const newMovieList = this.state.movies.filter(
+            m => m.id !== movie.id
+        )
 
-    this.setState(state =>({
-        movies:newMovieList
-    }))
-}
+        //eger yuxardaki array hazir sekilde elimizde olmasa bu formada yazmaq daha mentiqlidir
+        // this.setState({
+        // movies:newMovieList
+
+        // });
+
+        this.setState(state => ({
+            movies: newMovieList
+        }))
+    }
+
+    searchMovie = (event) => {
+        this.setState({ searchQuery: event.target.value })
+    }
 
 
 
     render() {
 
+        let filterdMovies = this.state.movies.filter(
+            (movie) => {
+                return movie.name.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1
+            }
+        )
+
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
-                       <SearchBar/>
+                        <SearchBar SearchMovieProp={this.searchMovie} />
                     </div>
                 </div>
 
-                <MovieList  movies={this.state.movies}
+                <MovieList movies={filterdMovies}
                     deleteMovieProp={this.deleteMovie}
                 />
-               
+
             </div>
         )
 
