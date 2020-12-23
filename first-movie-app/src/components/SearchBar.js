@@ -14,14 +14,21 @@ class SearchBar extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleFormSubmit}>
-                <div className="form-row mb-2">
-                    <div className="col-12">
+                <div className="form-row m-4">
+                    <div className="col-10">
 
                         <input onChange={this.props.SearchMovieProp} 
                         type="text" className="form-control" placeholder="Search a movie"
                         
                          />
 
+                    </div>
+                    <div className="col-2">
+                        <button  type="button" 
+                                className="btn btn-md btn-danger"
+                                style={{float:'right'}}>Add Movie
+
+                        </button>
                     </div>
                 </div>
             </form>
